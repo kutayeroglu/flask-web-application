@@ -1,0 +1,16 @@
+<html>
+	<head>
+		{% if title %}
+		<title> {{title}} - tv shows db </title>
+		{% else %}
+		<title> Welcome to tv shows db </title>
+		{% endif %}
+	</head>
+	<body>
+		<div> tv shows db;  
+			<a href="/index">Homepage</a>
+			<a href="/login">Login</a>
+		</div>
+	 	{% block content %} {% endblock %}
+	</body>
+</html>
