@@ -1,4 +1,4 @@
-from flask import render_template
+from flask import render_template, flash, redirect 
 from application import app 
 from application.forms import LoginForm
 
@@ -24,8 +24,12 @@ def index():
     return render_template('index.html', title='Home', user=random_user, credentials = groupx_credentials )
     
     
-@app.route('/login')
+@app.route('/login', methods=["GET", "POST"])
 def login():
-    beta_login_form = LoginForm()        
+    beta_login_form = LoginForm()  
+    if beta_login_form.validate_on_submit():
+        flash("Data requested for {}, remember me status = {}".format(
+            beta_login_form.username.data, beta_login_form.remember_me.data ))
+        return redirect('/index')      
     return render_template('login.html', title = 'Sign In', form=beta_login_form)
     
