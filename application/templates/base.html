@@ -8,8 +8,8 @@
 	</head>
 	<body>
 		<div> tv shows db;  
-			<a href="/index">Homepage</a>
-			<a href="/login">Login</a>
+			<a href="{{ url_for('index') }}">Homepage</a>
+			<a href="{{ url_for('login') }}">Login</a>
 		</div>
 		{% with messages = get_flashed_messages() %}
 		{% if messages %}
