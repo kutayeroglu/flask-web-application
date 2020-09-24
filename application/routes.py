@@ -8,7 +8,6 @@ from application.forms import LoginForm
 def index():
     random_user = {'username' : 'kutay '}
     groupx_credentials = [
-        
         {
             'user_cred' : { 'username' : 'yorgox'},
             'last_login' : '12-12-2019'
@@ -17,12 +16,9 @@ def index():
         {
             'user_cred' : { 'username' : 'calisanabasari'},
             'last_login' : '12-12-2007'
-            
         }
-        
     ]
     return render_template('index.html', title='Home', user=random_user, credentials = groupx_credentials )
-    
     
 @app.route('/login', methods=["GET", "POST"])
 def login():
