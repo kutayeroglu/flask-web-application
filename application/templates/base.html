@@ -1,15 +1,19 @@
 <html>
 	<head>
 		{% if title %}
-		<title> {{title}} - tv shows db </title>
+		<title> {{ title }} - tv shows db </title>
 		{% else %}
 		<title> Welcome to tv shows db </title>
 		{% endif %}
 	</head>
 	<body>
-		<div> tv shows db;  
+		<div> <h1> tv shows db; </h1>  <br>
 			<a href="{{ url_for('index') }}">Homepage</a>
+			{% if current_user.is_anonymous %}
 			<a href="{{ url_for('login') }}">Login</a>
+			{% else %}
+			<a href="{{ url_for('logout') }}">Logout</a>
+			{% endif %}
 		</div>
 		{% with messages = get_flashed_messages() %}
 		{% if messages %}
