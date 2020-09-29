@@ -8,10 +8,11 @@
 	</head>
 	<body>
 		<div> <h1> tv shows db; </h1>  <br>
-			<a href="{{ url_for('index') }}">Homepage</a>
+			<a href="{{ url_for('index') }}">Homepage</a> &emsp;&emsp;
 			{% if current_user.is_anonymous %}
-			<a href="{{ url_for('login') }}">Login</a>
+			<a href="{{ url_for('login') }}">Login</a> &emsp;&emsp;
 			{% else %}
+			<a href="{{ url_for('user', username=current_user.username) }}" > Profile: {{ current_user.username }} </a> &emsp;&emsp;
 			<a href="{{ url_for('logout') }}">Logout</a>
 			{% endif %}
 		</div>

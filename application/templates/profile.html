@@ -1,0 +1,13 @@
+{% extends "base.html"%}
+{% block content %}
+	<table>
+		<tr valign="top">
+			<td><img src="{{ current_user.avatar(64) }}"></td>
+			<td><h1> {{ current_user.username }} </h1></td>
+		</tr>
+	</table>
+	<hr>
+	{% for action in actions %}
+		{% include "_action.html" %}
+	{% endfor %}
+{% endblock %}

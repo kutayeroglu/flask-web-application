@@ -58,6 +58,19 @@ def signup():
         flash('Hooray! Your account is successfully created.')
         return redirect(url_for('login'))
     return render_template('signup.html', title = "Sign up", form = beta_signup_form)
+    
+    
+@app.route('/<username>')
+@login_required
+def user(username):
+    #Using first_or_404 to prevent crashes if the user is not found. 
+    current_user = User.query.filter_by(username=username).first_or_404()
+    actions = [
+        {  'actor' : current_user, 'body' : 'random text #1 '  },
+        {  'actor' : current_user, 'body' : 'random text #2' }
+    ]
+    return render_template('profile.html', current_user=current_user, actions=actions)
+    
 
 
     
