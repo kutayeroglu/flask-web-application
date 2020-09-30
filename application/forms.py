@@ -31,6 +31,7 @@ class SignupForm(FlaskForm):
 
 class PasswordResetForm(FlaskForm):
     userinf = StringField('Enter your username or email:', validators =[DataRequired()])
+    submit = SubmitField('Change Password')
     #reset_by shows what the user is using to reset their password. Its value is either 'username' or 'email'
     reset_by = ''
         
