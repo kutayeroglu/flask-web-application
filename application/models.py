@@ -40,7 +40,9 @@ class Action(db.Model):
 
     def __repr__(self):
         return '<Action {}>'.format(self.random_text)
-      
+        
+ 
+     
 
 """"
 class Action_document 

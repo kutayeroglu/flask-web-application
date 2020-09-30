@@ -1,13 +1,13 @@
 <html>
 	<head>
 		{% if title %}
-		<title> {{ title }} - tv shows db </title>
+		<title> {{ title }} </title>
 		{% else %}
-		<title> Welcome to tv shows db </title>
+		<title> TV Shows DB </title>
 		{% endif %}
 	</head>
 	<body>
-		<div> <h1> tv shows db; </h1>  <br>
+		<div> <h1> Greetings </h1>  <br>
 			<a href="{{ url_for('index') }}">Homepage</a> &emsp;&emsp;
 			{% if current_user.is_anonymous %}
 			<a href="{{ url_for('login') }}">Login</a> &emsp;&emsp;
