@@ -25,3 +25,8 @@ class SignupForm(FlaskForm):
         user = User.query.filter_by(email=email.data).first()
         if user is not None:
             raise ValidationError('There is an existing account with the specified mail address.')
+
+class PasswordResetForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired()])
+    email = StringField('Email', validators = [DataRequired(), Email()])
+    

@@ -1,9 +1,16 @@
+from datetime import datetime 
 from flask import render_template, flash, redirect, url_for, request
 from werkzeug.urls import url_parse  
 from flask_login import current_user, login_user, logout_user, login_required
 from application import app, db
 from application.forms import LoginForm, SignupForm
 from application.models import User
+
+@app.before_request
+def before_request():
+    if current_user.is_authenticated:
+        current_user.last_seen = datetime.now(tz=None).isoformat(timespec='seconds')
+        db.session.commit()
 
 @app.route('/')
 @app.route('/index')

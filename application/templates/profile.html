@@ -4,6 +4,7 @@
 		<tr valign="top">
 			<td><img src="{{ current_user.avatar(64) }}"></td>
 			<td><h1> {{ current_user.username }} </h1></td>
+			{% if current_user.last_seen %}<p> Last seen: {{current_user.last_seen}} </p>{% endif %}
 		</tr>
 	</table>
 	<hr>
