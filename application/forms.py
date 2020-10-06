@@ -11,38 +11,39 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Sign In')
     
 class SignupForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired(), Length(min=5, max=20)])
-    email = StringField('Email', validators = [DataRequired(), Email()])
+    username = StringField('Username', validators=[DataRequired()])
+    email = StringField('Email', validators = [DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     password_verif = PasswordField('Re-enter Password', validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Register')
     
-    def validate_username(self, username):        
-        if not (re.search(r"(/^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$/')", username)):
-            raise ValidationError("Allowed special characters are underscore and hyphen.")
-        user = User.query.filter_by(username=username.data).first()
-        if user is not None:
-            raise ValidationError('That username is already taken.') 
+    def validate_username(self, username):
+        if not re.search(r"^(?=.{4,20}$)(?![_.])[a-zA-Z0-9._]+(?<![_.])$", username.data):
+            raise ValidationError("Unallowed characters in username.")
             
     def validate_email(self, email):
+        if not re.search(r'[\w\.-]+@[\w\.-]+', email.data):
+            raise ValidationError("Email address not correct.")
         user = User.query.filter_by(email=email.data).first()
         if user is not None:
             raise ValidationError('There is an existing account with the specified mail address.')
+        
 
 class PasswordResetForm(FlaskForm):
     userinf = StringField('Enter username or email:', validators =[DataRequired()])
     submit = SubmitField('Change Password')
-    #reset_by shows what the user is using to reset their password. Its value is either 'username' or 'email'
-    reset_by = ''
         
-    def validate_reset_by(self, userinf):  
-        if userinf is not Null:       
-            if "@" in userinf:
-                reset_by = 'email'
-                SignupForm.validate_email(userinf)
+    def validate_userinf(self, userinf):  
+        if userinf is not None:       
+            if "@" in str(userinf):
+                '''
+                If there is a @ in the email, we know user is resetting by email. Because only "_" and "." are the allowed 
+                special characters in usernames.
+                '''
+                SignupForm.validate_email(PasswordResetForm, userinf)
             else:
-                reset_by = 'username'
-                SignupForm.validate_username(userinf)
-    
+                SignupForm.validate_username(PasswordResetForm, userinf)
+        else: 
+            raise ValidationError("You can't leave this field empty.")
 
 

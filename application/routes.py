@@ -80,7 +80,7 @@ def user(username):
 def reset():
     reset_form = PasswordResetForm()
     if request.method == 'GET':
-        return render_template('password_reset.html', form=reset_form)
+        return render_template('password_reset.html', title="Password Reset", form=reset_form)
     elif request.method == 'POST':
         #If provided information is true, password reset mail will be sent. 
         if reset_form.validate_on_submit():
