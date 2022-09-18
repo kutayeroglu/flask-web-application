@@ -1,2 +1,1 @@
-# sqlite-db-api
-[Work in progress] An API that allows manipulating data on a sqlite database. Written on Python Flask.
+Simple web application with login & sign-up functionality.
